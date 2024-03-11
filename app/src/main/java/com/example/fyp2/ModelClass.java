@@ -1,7 +1,5 @@
 package com.example.fyp2;
 
-
-
 import android.graphics.Bitmap;
 
 public class ModelClass {
