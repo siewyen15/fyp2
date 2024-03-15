@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/textView_workout_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Workout Title"
+        android:layout_centerHorizontal="true"
+        android:textSize="24sp"
+        android:layout_marginTop="16dp"/>
+
+    <TextView
+        android:id="@+id/textView_workout_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Workout:"
+        android:layout_below="@id/textView_workout_title"
+        android:layout_marginTop="16dp"/>
+
+    <Spinner
+        android:id="@+id/spinner_workout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/textView_workout_label"
+        android:layout_below="@id/textView_workout_title"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="13dp"/>
+
+    <TextView
+        android:id="@+id/textView_sets_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Set:"
+        android:layout_below="@id/spinner_workout"
+        android:layout_marginTop="16dp"/>
+
+    <Spinner
+        android:id="@+id/spinner_sets"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/spinner_workout"
+        android:layout_marginStart="71dp"
+        android:layout_marginTop="13dp"/>
+
+    <TextView
+        android:id="@+id/textView_duration_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Duration:"
+        android:layout_below="@id/spinner_sets"
+        android:layout_marginTop="16dp"/>
+
+    <Spinner
+        android:id="@+id/spinner_duration"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/spinner_sets"
+        android:layout_marginStart="70dp"
+        android:layout_marginTop="13dp"/>
+
+    <EditText
+        android:id="@+id/editText_workout_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/spinner_duration"
+        android:layout_marginTop="20dp"
+        android:hint="Workout Name"/>
+
+    <Button
+        android:id="@+id/button_add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@id/editText_workout_name"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"/>
+
+</RelativeLayout>

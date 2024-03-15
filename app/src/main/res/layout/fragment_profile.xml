@@ -51,7 +51,7 @@
         android:background="@drawable/white_background"
         android:layout_marginStart="24dp"
         android:layout_marginEnd="24dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/titleUsername">
@@ -210,16 +210,29 @@
     </LinearLayout>
 
     <Button
+        android:id="@+id/editButton"
         android:layout_width="0dp"
         android:layout_height="60dp"
-        android:id="@+id/editButton"
+        android:layout_marginTop="10dp"
         android:gravity="center"
         android:text="Edit Profile"
         android:textSize="18sp"
-        app:cornerRadius = "20dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:cornerRadius="20dp"
         app:layout_constraintEnd_toEndOf="@id/linearLayout"
         app:layout_constraintStart_toStartOf="@id/linearLayout"
-        app:layout_constraintTop_toBottomOf="@id/linearLayout"/>
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
+    <Button
+        android:id="@+id/logoutButton"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="70dp"
+        android:gravity="center"
+        android:text="Log Out"
+        android:textSize="18sp"
+        app:cornerRadius="20dp"
+        app:layout_constraintEnd_toEndOf="@id/linearLayout"
+        app:layout_constraintStart_toStartOf="@id/linearLayout"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

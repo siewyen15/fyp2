@@ -1,23 +1,22 @@
+// UserProfile.java
 package com.example.fyp2;
-
-public class User {
-
+public class UserProfile {
     private String name;
     private String email;
     private String username;
     private String password;
 
-    // Empty constructor needed for Firebase
-    public User() {}
+    public UserProfile() {
+        // Default constructor required for calls to DataSnapshot.getValue(UserProfile.class)
+    }
 
-    public User(String name, String email, String username, String password) {
+    public UserProfile(String name, String email, String username, String password) {
         this.name = name;
         this.email = email;
         this.username = username;
         this.password = password;
     }
 
-    // Getters and setters
     public String getName() {
         return name;
     }

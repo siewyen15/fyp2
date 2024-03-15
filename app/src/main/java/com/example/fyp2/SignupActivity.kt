@@ -6,11 +6,13 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.fyp2.databinding.ActivitySignupBinding
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 
 class SignupActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivitySignupBinding
     private lateinit var firebaseAuth: FirebaseAuth
+    private lateinit var firestore: FirebaseFirestore
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -18,6 +20,7 @@ class SignupActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         firebaseAuth = FirebaseAuth.getInstance()
+        firestore = FirebaseFirestore.getInstance()
 
         binding.signupButton.setOnClickListener {
             val email = binding.signupEmail.text.toString()
@@ -29,12 +32,31 @@ class SignupActivity : AppCompatActivity() {
                     firebaseAuth.createUserWithEmailAndPassword(email, password)
                         .addOnCompleteListener { task ->
                             if (task.isSuccessful) {
-                                Toast.makeText(
-                                    this,
-                                    "Signup successful",
-                                    Toast.LENGTH_SHORT
-                                ).show()
-                                navigateToEditProfile()
+                                val currentUser = firebaseAuth.currentUser
+                                currentUser?.let { user ->
+                                    // Create a document in the user's subcollection
+                                    val userInfo = HashMap<String, Any>()
+                                    userInfo["email"] = email // Example, add more fields as needed
+                                    firestore.collection("users").document(user.uid)
+                                        .collection("userInfo")
+                                        .document("profile")
+                                        .set(userInfo)
+                                        .addOnSuccessListener {
+                                            Toast.makeText(
+                                                this,
+                                                "Signup successful",
+                                                Toast.LENGTH_SHORT
+                                            ).show()
+                                            navigateToEditProfile()
+                                        }
+                                        .addOnFailureListener { e ->
+                                            Toast.makeText(
+                                                this,
+                                                "Failed to create user profile: ${e.message}",
+                                                Toast.LENGTH_SHORT
+                                            ).show()
+                                        }
+                                }
                             } else {
                                 Toast.makeText(
                                     this,
