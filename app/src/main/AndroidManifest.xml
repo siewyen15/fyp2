@@ -50,6 +50,9 @@
             android:name=".UploadActivity"
             android:exported="false" />
         <activity
+            android:name=".NewProfileActivity"
+            android:exported="false" />
+        <activity
             android:name=".WorkoutDashboardActivity"
             android:exported="false" />
         <activity

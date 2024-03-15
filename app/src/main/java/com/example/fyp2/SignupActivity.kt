@@ -47,7 +47,7 @@ class SignupActivity : AppCompatActivity() {
                                                 "Signup successful",
                                                 Toast.LENGTH_SHORT
                                             ).show()
-                                            navigateToEditProfile()
+                                            navigateToNewProfile()
                                         }
                                         .addOnFailureListener { e ->
                                             Toast.makeText(
@@ -79,8 +79,8 @@ class SignupActivity : AppCompatActivity() {
         }
     }
 
-    private fun navigateToEditProfile() {
-        val intent = Intent(this, EditProfileActivity::class.java)
+    private fun navigateToNewProfile() {
+        val intent = Intent(this, NewProfileActivity::class.java)
         startActivity(intent)
         finish() // Finish the SignupActivity to prevent returning to it after navigating to EditProfileActivity
     }
