@@ -10,6 +10,7 @@
     <string name="next">Next</string>
     <string name="previous">Previous</string>
 
+
     <string name="lorem_ipsum">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in scelerisque sem. Mauris
         volutpat, dolor id interdum ullamcorper, risus dolor egestas lectus, sit amet mattis purus
@@ -48,4 +49,10 @@
     </string>
     <string name="physical_health">Physical Health</string>
     <string name="mental_health">Mental Health</string>
+
+
+    <string name="water_channel_name">Water Channel Name</string>
+    <string name="water_channel_description">Water Channel Description</string>
+
+
 </resources>

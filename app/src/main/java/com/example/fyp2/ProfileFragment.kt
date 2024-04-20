@@ -55,6 +55,8 @@ class ProfileFragment : Fragment() {
 
             // Retrieve user data from Firestore and display it
             db.collection("users").document(userId)
+                .collection("Profile")
+                .document("UserInfo")
                 .get()
                 .addOnSuccessListener { document ->
                     if (document != null && document.exists()) {

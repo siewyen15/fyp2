@@ -9,5 +9,10 @@
     <color name="purple_200">#FFBB86FC</color>
     <color name="purple_500">#FF6200EE</color>
     <color name="purple_700">#FF3700B3</color>
-    <color name="purple">#800080</color>
+    <color name="purple">#FF800080</color>
+    <color name="happy_color">#FF2196F3</color>
+    <color name="sad_color">#FFFF5722</color>
+    <color name="neutral_color">#FFFFEB3B</color>
+    <color name="angry_color">#FFF44336</color>
+    <color name ="excited_color">#FF000000</color>
 </resources>

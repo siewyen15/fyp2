@@ -31,8 +31,10 @@ class HealthFragment : Fragment() {
 
         mentalHealthButton.setOnClickListener {
             // Handle mental health button click
-            // You can navigate to another fragment or perform any action here
+            val intent = Intent(requireContext(), MentalHealthActivity::class.java)
+            startActivity(intent)
         }
+
 
         return view
     }

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/titleTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Water"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="16dp"/>
+
+    <EditText
+        android:id="@+id/dailyGoalEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/titleTextView"
+        android:layout_marginTop="16dp"
+        android:hint="Enter Daily Goal (in ml)"
+        android:inputType="numberDecimal" />
+
+    <EditText
+        android:id="@+id/consumedAmountEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/dailyGoalEditText"
+        android:layout_marginTop="16dp"
+        android:hint="Enter Consumed Amount (in ml)"
+        android:inputType="numberDecimal" />
+
+    <Button
+        android:id="@+id/notificationButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/consumedAmountEditText"
+        android:layout_marginTop="16dp"
+        android:text="Set Notification" />
+
+    <TextView
+        android:id="@+id/notificationTimeTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/notificationButton"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="10dp"
+        android:text="Selected Notification Time: "
+        android:textSize="16sp" />
+
+    <!-- Line to show the selected notification time -->
+
+    <Button
+        android:id="@+id/submitButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/notificationTimeTextView"
+        android:layout_marginTop="14dp"
+        android:text="Submit" />
+
+    <TextView
+        android:id="@+id/percentageTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/submitButton"
+        android:layout_marginTop="24dp"
+        android:text="Overall percentage: "
+        android:textSize="16sp" />
+
+    <Button
+        android:id="@+id/showChartButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/percentageTextView"
+        android:layout_marginTop="18dp"
+        android:text="Show Overall Chart" />
+
+    <View
+        android:id="@+id/notificationLine"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/black"
+        android:layout_below="@id/notificationButton"
+        android:layout_marginTop="16dp" />
+
+
+
+</RelativeLayout>
