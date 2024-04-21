@@ -1,15 +1,17 @@
 package com.example.fyp2
 
 import android.content.Context
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class WorkoutAdapter(private val context: Context, private val workoutList: List<Workout>) :
-    RecyclerView.Adapter<WorkoutAdapter.WorkoutViewHolder>() {
+class WorkoutAdapter(
+    private val context: Context,
+    private val workoutList: List<String>,
+    private val onItemClick: (String) -> Unit
+) : RecyclerView.Adapter<WorkoutAdapter.WorkoutViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WorkoutViewHolder {
         val view = LayoutInflater.from(context).inflate(R.layout.item_workout, parent, false)
@@ -17,19 +19,8 @@ class WorkoutAdapter(private val context: Context, private val workoutList: List
     }
 
     override fun onBindViewHolder(holder: WorkoutViewHolder, position: Int) {
-        val workout = workoutList[position]
-        holder.bind(workout)
-
-        // Handle item click
-        holder.itemView.setOnClickListener {
-            // Start WorkoutDetailsActivity and pass workout details
-            val intent = Intent(context, WorkoutDetailsActivity::class.java).apply {
-                putExtra("title", workout.workoutName)
-                putExtra("duration", workout.duration)
-                putExtra("sets", workout.sets)
-            }
-            context.startActivity(intent)
-        }
+        val workoutType = workoutList[position]
+        holder.bind(workoutType)
     }
 
     override fun getItemCount(): Int {
@@ -37,14 +28,13 @@ class WorkoutAdapter(private val context: Context, private val workoutList: List
     }
 
     inner class WorkoutViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val titleTextView: TextView = itemView.findViewById(R.id.workout_title)
-        private val durationTextView: TextView = itemView.findViewById(R.id.workout_duration)
-        private val setsTextView: TextView = itemView.findViewById(R.id.workout_sets)
+        private val workoutTextView: TextView = itemView.findViewById(R.id.textView_workout)
 
-        fun bind(workout: Workout) {
-            titleTextView.text = workout.workoutName
-            durationTextView.text = workout.duration.toString()
-            setsTextView.text = workout.sets.toString()
+        fun bind(workoutType: String) {
+            workoutTextView.text = workoutType
+            workoutTextView.setOnClickListener {
+                onItemClick.invoke(workoutType)
+            }
         }
     }
 }

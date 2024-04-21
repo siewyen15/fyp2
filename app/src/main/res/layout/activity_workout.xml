@@ -1,34 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="16dp">
+    android:layout_height="match_parent">
 
+    <!-- Health TextView -->
     <TextView
-        android:id="@+id/textView_workout_title"
+        android:id="@+id/textView_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Workout Title"
-        android:layout_centerHorizontal="true"
+        android:text="Physical Health"
         android:textSize="24sp"
-        android:layout_marginTop="16dp"/>
+        android:textStyle="bold"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
 
-    <Button
-        android:id="@+id/button_add_workout"
+    <!-- Vertical LinearLayout containing ImageButtons -->
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Add"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="10dp"
-        android:onClick="onAddWorkoutButtonClick"/>
+        android:orientation="vertical"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@id/textView_title"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="16dp">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView_workouts"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/textView_workout_title"
-        android:layout_marginTop="16dp"/>
+        <!-- Push-ups Button -->
+        <Button
+            android:id="@+id/pushups_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Push-ups"
+            android:layout_marginBottom="16dp"/>
 
-</RelativeLayout>
+        <!-- Sit-ups Button -->
+        <Button
+            android:id="@+id/situps_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sit-ups"
+            android:layout_marginBottom="16dp"/>
+
+        <!-- Squats Button -->
+        <Button
+            android:id="@+id/squats_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Squats"
+            android:layout_marginBottom="16dp"/>
+
+        <!-- Plank Button -->
+        <Button
+            android:id="@+id/plank_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Plank"/>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

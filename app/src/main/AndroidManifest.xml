@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
+
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
-
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
-
-
 
     <application
         android:allowBackup="true"
@@ -17,6 +15,46 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Fyp2"
         tools:targetApi="31">
+        <activity
+            android:name=".WorkoutCompleteActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AddWorkoutGoalActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Fyp2" />
+        <activity
+            android:name=".WorkoutGoalActivity"
+            android:exported="false" />
+        <activity
+            android:name=".PlanksActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SquatsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SitUpsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".PushUpsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".WorkoutReportActivity"
+            android:exported="false" />
+        <activity
+            android:name=".PhysicalHealthActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MeditationActivity"
+            android:exported="false" />
+        <activity
+            android:name=".YogaActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AddEmergencyContact"
+            android:exported="false" />
+        <activity
+            android:name=".WaterReportActivity"
+            android:exported="false" />
         <activity
             android:name=".MoodReportActivity"
             android:exported="false" />
@@ -93,8 +131,6 @@
             android:name=".NotificationReceiver"
             android:enabled="true"
             android:exported="false" />
-
     </application>
-
 
 </manifest>

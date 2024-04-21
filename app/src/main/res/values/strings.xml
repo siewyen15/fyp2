@@ -53,6 +53,11 @@
 
     <string name="water_channel_name">Water Channel Name</string>
     <string name="water_channel_description">Water Channel Description</string>
+    <string name="Yoga">Yoga\n</string>
+    <string name="Meditation">Meditation\n</string>
+    <string name="yoga">Yoga\n</string>
+    <string name="workout_guide">Workout Guide</string>
+    <string name="workout_report">Workout Report\n\n</string>
 
 
 </resources>

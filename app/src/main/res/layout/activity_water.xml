@@ -19,73 +19,67 @@
         android:id="@+id/dailyGoalEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/titleTextView"
-        android:layout_marginTop="16dp"
-        android:hint="Enter Daily Goal (in ml)"
+        android:layout_below="@+id/titleTextView"
+        android:layout_marginBottom="8dp"
+        android:hint="What's your goal today (ml):"
         android:inputType="numberDecimal" />
 
     <EditText
-        android:id="@+id/consumedAmountEditText"
+        android:id="@+id/notificationHourEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:hint="How many hours would you like to be reminded:"
+        android:inputType="number"
         android:layout_below="@id/dailyGoalEditText"
-        android:layout_marginTop="16dp"
-        android:hint="Enter Consumed Amount (in ml)"
-        android:inputType="numberDecimal" />
+        android:layout_marginBottom="8dp"/>
 
     <Button
         android:id="@+id/notificationButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/consumedAmountEditText"
-        android:layout_marginTop="16dp"
-        android:text="Set Notification" />
+        android:text="Set Notification Time"
+        android:layout_below="@id/notificationHourEditText"
+        android:layout_marginBottom="8dp"/>
 
     <TextView
         android:id="@+id/notificationTimeTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="Enter Specified Notification: Before this time you need to reach your goal"
+        android:visibility="gone"
         android:layout_below="@id/notificationButton"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="10dp"
-        android:text="Selected Notification Time: "
-        android:textSize="16sp" />
+        android:layout_marginBottom="8dp"/>
 
-    <!-- Line to show the selected notification time -->
+    <EditText
+        android:id="@+id/consumedAmountEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter consumed amount"
+        android:inputType="numberDecimal"
+        android:layout_below="@id/notificationTimeTextView"
+        android:layout_marginBottom="8dp"/>
 
     <Button
         android:id="@+id/submitButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/notificationTimeTextView"
-        android:layout_marginTop="14dp"
-        android:text="Submit" />
+        android:text="Submit"
+        android:layout_below="@id/consumedAmountEditText"/>
+
+    <Button
+        android:id="@+id/overallReportButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/submitButton"
+        android:layout_marginTop="16dp"
+        android:text="Water Report" />
 
     <TextView
         android:id="@+id/percentageTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/submitButton"
-        android:layout_marginTop="24dp"
-        android:text="Overall percentage: "
-        android:textSize="16sp" />
-
-    <Button
-        android:id="@+id/showChartButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/percentageTextView"
-        android:layout_marginTop="18dp"
-        android:text="Show Overall Chart" />
-
-    <View
-        android:id="@+id/notificationLine"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@android:color/black"
-        android:layout_below="@id/notificationButton"
-        android:layout_marginTop="16dp" />
-
-
+        android:text="Overall percentage:"
+        android:layout_below="@id/overallReportButton"
+        android:layout_marginTop="16dp"/>
 
 </RelativeLayout>

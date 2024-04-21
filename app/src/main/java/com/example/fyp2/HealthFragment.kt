@@ -25,7 +25,7 @@ class HealthFragment : Fragment() {
         // Set click listeners for the buttons
         physicalHealthButton.setOnClickListener {
             // Handle physical health button click
-            val intent = Intent(requireContext(), WorkoutDashboardActivity::class.java)
+            val intent = Intent(requireContext(), PhysicalHealthActivity::class.java)
             startActivity(intent)
         }
 
