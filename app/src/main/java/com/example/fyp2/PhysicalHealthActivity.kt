@@ -14,6 +14,9 @@ class PhysicalHealthActivity : AppCompatActivity() {
         val workoutButton: ImageButton = findViewById(R.id.workoutButton)
         val reportButton: ImageButton = findViewById(R.id.reportButton)
         val goalButton: ImageButton = findViewById(R.id.goalButton) // Add this line
+        val calendarButton: ImageButton = findViewById(R.id.calendarButton) // Add this line
+        val calorieButton: ImageButton = findViewById(R.id.calorieButton) // Add this line
+        val bodyDataButton: ImageButton = findViewById(R.id.bodyDataButton) // Add this line
 
         // Set click listeners for the ImageButtons
         workoutButton.setOnClickListener {
@@ -33,5 +36,19 @@ class PhysicalHealthActivity : AppCompatActivity() {
             val intent = Intent(this, WorkoutGoalActivity::class.java)
             startActivity(intent)
         }
+        // Inside the OnClickListener for ImageButton 4 (Calendar)
+        calendarButton.setOnClickListener {
+            val calendarIntent = Intent(this, WorkoutCalendarActivity::class.java)
+            startActivity(calendarIntent)
+        }
+
+//        // Inside the OnClickListener for ImageButton 5 (Calorie)
+//            val calorieIntent = Intent(this, CalorieCountActivity::class.java)
+//            startActivity(calorieIntent)
+//
+//         // Inside the OnClickListener for ImageButton 6 (Body)
+//            val bodyIntent = Intent(this, BodyDataActivity::class.java)
+//            startActivity(bodyIntent)
+
     }
 }

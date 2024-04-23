@@ -1,0 +1,40 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/background_with_border"> <!-- Add background border here -->
+
+    <TextView
+        android:id="@+id/exerciseTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:text="Exercise Name:"
+        android:padding="8dp" /> <!-- Add padding -->
+
+    <TextView
+        android:id="@+id/goalTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:text="Goal:"
+        android:padding="8dp" /> <!-- Add padding -->
+
+    <TextView
+        android:id="@+id/dateTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:text="Date:"
+        android:padding="8dp" /> <!-- Add padding -->
+
+    <TextView
+        android:id="@+id/completedTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:text="Completed:"
+        android:padding="8dp" /> <!-- Add padding -->
+
+</LinearLayout>

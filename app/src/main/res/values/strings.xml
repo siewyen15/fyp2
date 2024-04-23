@@ -58,6 +58,7 @@
     <string name="yoga">Yoga\n</string>
     <string name="workout_guide">Workout Guide</string>
     <string name="workout_report">Workout Report\n\n</string>
+    <string name="exercise_prompt">Exercise Type</string>
 
 
 </resources>

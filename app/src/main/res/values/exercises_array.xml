@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="exercise_types">
+        <item>Push-ups</item>
+        <item>Sit-ups</item>
+        <item>Squats</item>
+        <item>Plank</item>
+    </string-array>
+</resources>

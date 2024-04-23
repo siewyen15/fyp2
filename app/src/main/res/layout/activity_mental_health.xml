@@ -20,23 +20,19 @@
     <!-- First row of buttons -->
     <LinearLayout
         android:id="@+id/firstRow"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textView_title_mood"
-        android:layout_marginTop="16dp"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintHorizontal_chainStyle="packed">
+        android:layout_marginTop="60dp">
 
-        <!-- Mood ImageButton -->
+        <!-- ImageButton 1 -->
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:gravity="center"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:gravity="center">
 
             <ImageButton
                 android:id="@+id/button_mood"
@@ -55,13 +51,13 @@
 
         </LinearLayout>
 
-        <!-- Mental Wellness ImageButton -->
+        <!-- ImageButton 2 -->
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:gravity="center"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:gravity="center">
 
             <ImageButton
                 android:id="@+id/button_mental_wellness"
@@ -79,28 +75,25 @@
                 android:layout_marginTop="8dp"/>
 
         </LinearLayout>
+
     </LinearLayout>
 
     <!-- Second row of buttons -->
     <LinearLayout
         android:id="@+id/secondRow"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/firstRow"
-        android:layout_marginTop="16dp"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintHorizontal_chainStyle="packed">
+        android:layout_marginTop="16dp">
 
-        <!-- Journal ImageButton -->
+        <!-- ImageButton 3 -->
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:gravity="center"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:gravity="center">
 
             <ImageButton
                 android:id="@+id/button_journal"
@@ -119,13 +112,13 @@
 
         </LinearLayout>
 
-        <!-- Emergency Contact ImageButton -->
+        <!-- ImageButton 4 -->
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:gravity="center"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:gravity="center">
 
             <ImageButton
                 android:id="@+id/button_emergency_contact"
@@ -143,28 +136,27 @@
                 android:layout_marginTop="8dp"/>
 
         </LinearLayout>
+
     </LinearLayout>
 
     <!-- Third row of buttons -->
     <LinearLayout
         android:id="@+id/thirdRow"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/secondRow"
-        android:layout_marginTop="16dp"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintHorizontal_chainStyle="packed">
+        android:layout_marginTop="16dp">
 
-        <!-- Water ImageButton -->
+        <!-- ImageButton 5 -->
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:gravity="center"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:gravity="center">
 
             <ImageButton
                 android:id="@+id/button_water"
@@ -182,6 +174,7 @@
                 android:layout_marginTop="8dp"/>
 
         </LinearLayout>
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

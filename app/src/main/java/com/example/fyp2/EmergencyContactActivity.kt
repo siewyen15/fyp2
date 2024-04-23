@@ -2,6 +2,8 @@
 
 package com.example.fyp2
 
+import android.content.ClipData
+import android.content.ClipboardManager
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -54,19 +56,27 @@ class EmergencyContactActivity : AppCompatActivity() {
             startActivity(Intent(this, AddEmergencyContact::class.java))
         }
 
-        // Handle item click to initiate phone call
+        // Handle item click to copy phone number and initiate phone call
         emergencyContactListView.setOnItemClickListener { _, _, position, _ ->
             val selectedContact = emergencyContacts[position]
             val phoneNumber = extractPhoneNumber(selectedContact)
             phoneNumber?.let {
                 val countryCode = extractCountryCode(selectedContact)
                 val phoneNumberWithCountryCode = countryCode + it
+
+                // Copy phone number to clipboard
+                val clipboardManager = getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
+                val clipData = ClipData.newPlainText("Phone Number", phoneNumberWithCountryCode)
+                clipboardManager.setPrimaryClip(clipData)
+
+                // Initiate phone call
                 val intent = Intent(Intent.ACTION_DIAL).apply {
                     data = Uri.parse("tel:$phoneNumberWithCountryCode")
                 }
                 startActivity(intent)
             }
         }
+
     }
 
     override fun onResume() {

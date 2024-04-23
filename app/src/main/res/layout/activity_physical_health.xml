@@ -19,25 +19,23 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 
-    <!-- Horizontal LinearLayout containing ImageButtons -->
+    <!-- ImageButton Row 1 -->
     <LinearLayout
-        android:id="@+id/linearLayout2"
-        android:layout_width="wrap_content"
+        android:id="@+id/linearLayout1"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="60dp"
         android:gravity="center"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textView_title">
 
-        <!-- Workout ImageButton -->
+        <!-- ImageButton 1 -->
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:gravity="center">
 
             <ImageButton
                 android:id="@+id/workoutButton"
@@ -50,18 +48,19 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="Workout"
-                android:textSize="16sp" />
+                android:text="Tutorial"
+                android:textSize="16sp"
+                android:layout_marginTop="8dp"/>
 
         </LinearLayout>
 
-        <!-- Report ImageButton -->
+        <!-- ImageButton 2 -->
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:gravity="center">
 
             <ImageButton
                 android:id="@+id/reportButton"
@@ -74,37 +73,136 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
                 android:text="Report"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                android:layout_marginTop="8dp"/>
 
         </LinearLayout>
 
     </LinearLayout>
 
-    <!-- Goal ImageButton -->
-
-    <!-- Goal TextView -->
-    <ImageButton
-        android:id="@+id/goalButton"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:contentDescription="Goal"
-        android:scaleType="fitCenter"
-        android:src="@drawable/physical_health"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.467"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
-
-    <TextView
-        android:layout_width="wrap_content"
+    <!-- ImageButton Row 2 -->
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Goal"
-        android:textSize="16sp"
-        app:layout_constraintTop_toBottomOf="@id/goalButton"
-        app:layout_constraintStart_toStartOf="@id/goalButton"
-        app:layout_constraintEnd_toEndOf="@id/goalButton"
-        android:layout_marginTop="8dp"/>
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@id/linearLayout1">
+
+        <!-- ImageButton 3 -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <ImageButton
+                android:id="@+id/goalButton"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:contentDescription="Goal"
+                android:scaleType="fitCenter"
+                android:src="@drawable/physical_health" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Goal"
+                android:textSize="16sp"
+                android:layout_marginTop="8dp"/>
+
+        </LinearLayout>
+
+        <!-- ImageButton 4 -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <ImageButton
+                android:id="@+id/calendarButton"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:contentDescription="Image 4"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_launcher_foreground" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Calendar"
+                android:textSize="16sp"
+                android:layout_marginTop="8dp"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!-- ImageButton Row 3 -->
+    <LinearLayout
+        android:id="@+id/linearLayout3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@id/linearLayout2">
+
+        <!-- ImageButton 5 -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <ImageButton
+                android:id="@+id/calorieButton"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:contentDescription="Image 5"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_launcher_foreground" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Calorie"
+                android:textSize="16sp"
+                android:layout_marginTop="8dp"/>
+
+        </LinearLayout>
+
+        <!-- ImageButton 6 -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <ImageButton
+                android:id="@+id/bodyDataButton"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:contentDescription="Image 6"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_launcher_foreground" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Body"
+                android:textSize="16sp"
+                android:layout_marginTop="8dp"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

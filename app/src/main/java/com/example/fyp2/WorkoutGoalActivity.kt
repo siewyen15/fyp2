@@ -2,18 +2,15 @@ package com.example.fyp2
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.ListAdapter
-import androidx.recyclerview.widget.RecyclerView
 import com.example.fyp2.databinding.ActivityWorkoutGoalBinding
-import com.example.fyp2.databinding.ItemWorkoutGoalBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 class WorkoutGoalActivity : AppCompatActivity() {
 
@@ -39,6 +36,10 @@ class WorkoutGoalActivity : AppCompatActivity() {
         binding.doneButton.setOnClickListener {
             navigateToWorkoutCompleteActivity()
         }
+        // Set click listener for the "Add Goal" button
+        binding.addGoalButton.setOnClickListener {
+            navigateToAddWorkoutGoalActivity()
+        }
     }
 
     private fun retrieveWorkoutGoals() {
@@ -55,11 +56,12 @@ class WorkoutGoalActivity : AppCompatActivity() {
                 .addOnSuccessListener { querySnapshot ->
                     val goalsList = mutableListOf<WorkoutGoal>()
                     for (document in querySnapshot.documents) {
-                        // Get exercise and goal from each document
+                        // Get exercise, goal, and date from each document
                         val exercise = document.getString("exercise") ?: ""
                         val goal = document.getString("goal") ?: ""
+                        val date = document.getString("date") ?: ""
                         // Add the goal to the list
-                        goalsList.add(WorkoutGoal(document.id, exercise, goal))
+                        goalsList.add(WorkoutGoal(document.id, exercise, goal, date.toString()))
                     }
                     // Update the RecyclerView with the retrieved goals
                     adapter.submitList(goalsList)
@@ -72,10 +74,62 @@ class WorkoutGoalActivity : AppCompatActivity() {
     }
 
     private fun onWorkoutGoalComplete(goal: WorkoutGoal) {
-        // Remove the completed workout goal from the list
-        val currentList = adapter.currentList.toMutableList()
-        currentList.remove(goal)
-        adapter.submitList(currentList)
+        val db = FirebaseFirestore.getInstance()
+        val user = FirebaseAuth.getInstance().currentUser
+
+        user?.let { currentUser ->
+            // Retrieve the original date from the goal
+            val originalDate = goal.date
+
+            // Move the completed workout goal to the "workoutGoalsCompleted" collection
+            val updatedGoal = goal.copy(date = originalDate) // Use the original date
+            db.collection("users")
+                .document(currentUser.uid)
+                .collection("workoutGoalsCompleted")
+                .add(updatedGoal) // Add the updated goal
+                .addOnSuccessListener { documentReference ->
+                    // If addition to "workoutGoalsCompleted" collection succeeds, delete the goal from "workoutGoals"
+                    db.collection("users")
+                        .document(currentUser.uid)
+                        .collection("workoutGoals")
+                        .document(goal.id)
+                        .delete()
+                        .addOnSuccessListener {
+                            // If deletion from "workoutGoals" collection succeeds, update the UI
+                            val currentList = adapter.currentList.toMutableList()
+                            currentList.remove(goal)
+                            adapter.submitList(currentList)
+
+                            // Pass all data to workoutGoalsComplete collection
+                            db.collection("users")
+                                .document(currentUser.uid)
+                                .collection("workoutGoalsComplete")
+                                .add(updatedGoal) // Add the updated goal to workoutGoalsComplete
+                                .addOnSuccessListener {
+                                    // Successfully added to workoutGoalsComplete
+                                }
+                                .addOnFailureListener { e ->
+                                    // If addition to "workoutGoalsComplete" collection fails, show an error message
+                                    Toast.makeText(this, "Error adding to workoutGoalsComplete: $e", Toast.LENGTH_SHORT).show()
+                                }
+                        }
+                        .addOnFailureListener { e ->
+                            // If deletion from "workoutGoals" collection fails, show an error message
+                            Toast.makeText(this, "Error deleting workout goal: $e", Toast.LENGTH_SHORT).show()
+                        }
+                }
+                .addOnFailureListener { e ->
+                    // If addition to "workoutGoalsCompleted" collection fails, show an error message
+                    Toast.makeText(this, "Error completing workout goal: $e", Toast.LENGTH_SHORT).show()
+                }
+        }
+    }
+
+
+
+    private fun navigateToAddWorkoutGoalActivity() {
+        val intent = Intent(this, AddWorkoutGoalActivity::class.java)
+        startActivity(intent)
     }
 
     private fun navigateToWorkoutCompleteActivity() {
@@ -83,5 +137,3 @@ class WorkoutGoalActivity : AppCompatActivity() {
         startActivity(intent)
     }
 }
-
-
