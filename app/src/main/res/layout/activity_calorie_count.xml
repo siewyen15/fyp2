@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Title: Calorie Count -->
+    <TextView
+        android:id="@+id/textView_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Calorie Count"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_marginTop="16dp"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:id="@+id/textViewCalorieBurnTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textView_title"
+        android:layout_marginTop="16dp"
+        android:text="Calorie Burnt per minute"
+        android:textSize="18sp"
+        android:layout_centerHorizontal="true"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/calorieData"
+        android:layout_below="@id/textViewCalorieBurnTitle"
+        android:layout_marginStart="16dp"
+        android:layout_centerHorizontal="true"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textViewCalorieBurnPushups"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pushups: 10.0"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/textViewCalorieBurnSitups"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Situps: 8.0"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/textViewCalorieBurnSquats"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Squats: 7.0"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/textViewCalorieBurnPlank"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Plank: 5.0"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+
+    <Spinner
+        android:id="@+id/spinnerExercise"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/calorieData"
+        android:layout_marginTop="16dp"
+        android:layout_centerHorizontal="true"
+        android:entries="@array/exercise_types"
+        android:prompt="@string/exercise_prompt"/>
+
+    <EditText
+        android:id="@+id/editTextMinutes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/spinnerExercise"
+        android:layout_marginTop="8dp"
+        android:layout_centerHorizontal="true"
+        android:hint="Minutes"
+        android:inputType="number"/>
+
+    <Button
+        android:id="@+id/btnCalculate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/editTextMinutes"
+        android:layout_marginTop="16dp"
+        android:layout_centerHorizontal="true"
+        android:text="Calculate"/>
+
+    <TextView
+        android:id="@+id/textViewResult"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btnCalculate"
+        android:layout_marginTop="16dp"
+        android:text="Result: "
+        android:textSize="18sp"
+        android:layout_centerHorizontal="true"/>
+</RelativeLayout>

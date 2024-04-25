@@ -42,10 +42,10 @@ class PhysicalHealthActivity : AppCompatActivity() {
             startActivity(calendarIntent)
         }
 
-//        // Inside the OnClickListener for ImageButton 5 (Calorie)
-//            val calorieIntent = Intent(this, CalorieCountActivity::class.java)
-//            startActivity(calorieIntent)
-//
+        // Inside the OnClickListener for ImageButton 5 (Calorie)
+            val calorieIntent = Intent(this, CalorieCountActivity::class.java)
+            startActivity(calorieIntent)
+
 //         // Inside the OnClickListener for ImageButton 6 (Body)
 //            val bodyIntent = Intent(this, BodyDataActivity::class.java)
 //            startActivity(bodyIntent)

@@ -1,0 +1,7 @@
+<resources>
+    <string-array name="post_types_array">
+        <item>Physical</item>
+        <item>Mental</item>
+        <!-- Add more items if needed -->
+    </string-array>
+</resources>

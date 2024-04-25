@@ -13,7 +13,7 @@
         android:layout_height="100dp"
         android:id="@+id/profileImg"
         android:layout_marginTop="30dp"
-        android:src="@drawable/logo"
+        android:src="@drawable/placeholder_image"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
@@ -210,7 +210,7 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/editButton"
+        android:id="@+id/editProfileButton"
         android:layout_width="0dp"
         android:layout_height="60dp"
         android:layout_marginTop="10dp"

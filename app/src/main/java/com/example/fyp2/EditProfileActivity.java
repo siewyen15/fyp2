@@ -1,76 +1,180 @@
 package com.example.fyp2;
 
-import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.Toast;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 public class EditProfileActivity extends AppCompatActivity {
 
-    EditText editName, editEmail, editUsername, editPassword;
-    Button saveButton;
-    DatabaseReference reference;
+    private EditText editName, editUsername;
+    private Button saveButton;
+    private ImageView profileImageView;
+    private ImageButton selectImageButton;
+    private FirebaseAuth mAuth;
+    private FirebaseUser currentUser;
+
+    // Request code for image picker
+    private static final int PICK_IMAGE_REQUEST = 1;
+
+    // Uri to hold the selected image URI
+    private Uri selectedImageUri;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_profile);
 
-        reference = FirebaseDatabase.getInstance().getReference("users");
-
         editName = findViewById(R.id.editName);
-        editEmail = findViewById(R.id.editEmail);
         editUsername = findViewById(R.id.editUsername);
-        editPassword = findViewById(R.id.editPassword);
         saveButton = findViewById(R.id.saveButton);
+        profileImageView = findViewById(R.id.profileImageView);
+        selectImageButton = findViewById(R.id.selectImageButton);
 
-        // Retrieve data from Intent
-        Intent intent = getIntent();
-        String nameUser = intent.getStringExtra("name");
-        String emailUser = intent.getStringExtra("email");
-        String usernameUser = intent.getStringExtra("username");
-        String passwordUser = intent.getStringExtra("password");
+        mAuth = FirebaseAuth.getInstance();
+        currentUser = mAuth.getCurrentUser();
 
-        // Display retrieved data
-        editName.setText(nameUser);
-        editEmail.setText(emailUser);
-        editUsername.setText(usernameUser);
-        editPassword.setText(passwordUser);
+        // Set click listener for select image button
+        selectImageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Open image picker
+                Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(intent, PICK_IMAGE_REQUEST);
+            }
+        });
 
+        // Set click listener for save button
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                // Save changes to Firebase
-                saveDataToFirebase();
-                // Navigate back to ProfileFragment
-                Intent intent = new Intent(EditProfileActivity.this, LoginActivity.class);
-                intent.putExtra("name", editName.getText().toString());
-                intent.putExtra("email", editEmail.getText().toString());
-                intent.putExtra("username", editUsername.getText().toString());
-                intent.putExtra("password", editPassword.getText().toString());
-                startActivity(intent);
-                // Finish the activity
-                finish();
+            public void onClick(View v) {
+                saveProfile();
             }
         });
     }
 
-    private void saveDataToFirebase() {
-        // Get updated data from EditText fields
-        String updatedName = editName.getText().toString();
-        String updatedEmail = editEmail.getText().toString();
-        String updatedUsername = editUsername.getText().toString();
-        String updatedPassword = editPassword.getText().toString();
-
-        // Update data in Firebase
-        String userId = reference.push().getKey();
-        reference.child(userId).child("name").setValue(updatedName);
-        reference.child(userId).child("email").setValue(updatedEmail);
-        reference.child(userId).child("username").setValue(updatedUsername);
-        reference.child(userId).child("password").setValue(updatedPassword);
+    // Handle the result of image picker
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
+            // Get the selected image URI
+            selectedImageUri = data.getData();
+            // Set the selected image to ImageView
+            profileImageView.setImageURI(selectedImageUri);
+        }
     }
+
+    private void saveProfile() {
+        String name = editName.getText().toString().trim();
+        String username = editUsername.getText().toString().trim();
+
+        FirebaseFirestore firestore = FirebaseFirestore.getInstance();
+
+        // Save profile information
+        DocumentReference userInfoRef = firestore.collection("users")
+                .document(currentUser.getUid())
+                .collection("Profile")
+                .document("UserInfo");
+
+        userInfoRef.get()
+                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        if (documentSnapshot.exists()) {
+                            String password = documentSnapshot.getString("password");
+                            UserProfile userProfile = new UserProfile(name, currentUser.getEmail(), username, password);
+
+                            userInfoRef.set(userProfile)
+                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void aVoid) {
+                                            Toast.makeText(EditProfileActivity.this, "Profile saved successfully", Toast.LENGTH_SHORT).show();
+                                        }
+                                    })
+                                    .addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                            Toast.makeText(EditProfileActivity.this, "Failed to save profile", Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
+                        } else {
+                            // Document does not exist
+                            Toast.makeText(EditProfileActivity.this, "User information not found", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(EditProfileActivity.this, "Failed to retrieve user information", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+        // Save profile image to Firebase Storage
+        if (selectedImageUri != null) {
+            StorageReference profileImageRef = FirebaseStorage.getInstance().getReference()
+                    .child("profileImages")
+                    .child(currentUser.getUid())
+                    .child(selectedImageUri.getLastPathSegment());
+
+            profileImageRef.putFile(selectedImageUri)
+                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                            // Get the download URL of the uploaded image
+                            profileImageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                @Override
+                                public void onSuccess(Uri downloadUri) {
+                                    // Save the download URL to Firestore
+                                    DocumentReference imageRef = firestore.collection("users")
+                                            .document(currentUser.getUid())
+                                            .collection("Profile")
+                                            .document("Image");
+
+                                    imageRef.set(new ProfileImage(downloadUri.toString()))
+                                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                @Override
+                                                public void onSuccess(Void aVoid) {
+                                                    Toast.makeText(EditProfileActivity.this, "Profile image saved successfully", Toast.LENGTH_SHORT).show();
+                                                }
+                                            })
+                                            .addOnFailureListener(new OnFailureListener() {
+                                                @Override
+                                                public void onFailure(@NonNull Exception e) {
+                                                    Toast.makeText(EditProfileActivity.this, "Failed to save profile image", Toast.LENGTH_SHORT).show();
+                                                }
+                                            });
+                                }
+                            });
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(EditProfileActivity.this, "Failed to upload profile image", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+        }
+    }
+
 }

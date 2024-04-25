@@ -4,6 +4,9 @@
 
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
 
     <application
         android:allowBackup="true"
@@ -15,6 +18,21 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Fyp2"
         tools:targetApi="31">
+        <activity
+            android:name=".AddJournalActivity"
+            android:exported="false" />
+        <activity
+            android:name=".CalorieCountActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ViewPostActivity"
+            android:exported="false" />
+        <activity
+            android:name=".OwnPostActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AddPostActivity"
+            android:exported="false" />
         <activity
             android:name=".ShowCalendarActivity"
             android:exported="false" />

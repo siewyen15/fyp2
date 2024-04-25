@@ -59,6 +59,9 @@
     <string name="workout_guide">Workout Guide</string>
     <string name="workout_report">Workout Report\n\n</string>
     <string name="exercise_prompt">Exercise Type</string>
+    <string name="image_description">Image Description</string>
+    <string name="description_hint">Description Hint</string>
+    <string name="save_button_label">Save Button</string>
 
 
 </resources>

@@ -18,6 +18,7 @@ class MoodActivity : AppCompatActivity() {
 
     private lateinit var mAuth: FirebaseAuth
     private lateinit var firestore: FirebaseFirestore
+    private lateinit var userId: String // Add this property
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,6 +26,7 @@ class MoodActivity : AppCompatActivity() {
 
         mAuth = FirebaseAuth.getInstance()
         firestore = FirebaseFirestore.getInstance()
+        userId = mAuth.currentUser?.uid ?: ""
 
         // Find views by their IDs
         val moodSpinner = findViewById<Spinner>(R.id.moodSpinner)
@@ -43,14 +45,17 @@ class MoodActivity : AppCompatActivity() {
         moodSpinner.adapter = adapter
 
         // Set the current date in the TextView
-        val currentDate = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date())
+        val currentDate = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).apply {
+            timeZone = TimeZone.getDefault()
+        }.format(Date())
+
         textViewDate.text = "Date: $currentDate"
 
         saveButton.setOnClickListener {
             val selectedMood = moodSpinner.selectedItem.toString()
             val userId = mAuth.currentUser?.uid
             if (userId != null) {
-                saveMood(userId, currentDate, selectedMood, moodTextView)
+                saveMood(userId, selectedMood, currentDate, moodTextView)
             }
         }
 
@@ -62,11 +67,11 @@ class MoodActivity : AppCompatActivity() {
                 }.time
             )
             textViewDate.text = "Date: $selectedDate"
-            displayMoodForDate(selectedDate, moodTextView)
+            displayMoodForDate(userId, selectedDate, moodTextView)
         }
 
         // Initial display for today's date
-        displayMoodForDate(currentDate, moodTextView)
+        displayMoodForDate(userId, currentDate, moodTextView)
 
         // Button click listener for overall report
         overallReportButton.setOnClickListener {
@@ -75,49 +80,71 @@ class MoodActivity : AppCompatActivity() {
         }
     }
 
-    private fun saveMood(userId: String, date: String, mood: String, moodTextView: TextView) {
+    private fun saveMood(userId: String, mood: String, date: String, moodTextView: TextView) {
         val userData = hashMapOf(
+            "date" to date,
             "mood" to mood
         )
         firestore.collection("users")
             .document(userId)
             .collection("moods")
-            .document(date)
-            .set(userData)
-            .addOnSuccessListener {
+            .add(userData) // Automatically generates a unique document ID for each mood entry
+            .addOnSuccessListener { documentReference ->
+                val moodId = documentReference.id
                 // After successfully saving the mood, display it instantly
-                displayMoodForDate(date, moodTextView)
+                displayMoodForId(userId, moodId, moodTextView)
                 Toast.makeText(this, "Mood saved successfully", Toast.LENGTH_SHORT).show()
             }
-            .addOnFailureListener {
-                Toast.makeText(this, "Failed to save mood", Toast.LENGTH_SHORT).show()
+            .addOnFailureListener { e ->
+                Toast.makeText(this, "Failed to save mood: $e", Toast.LENGTH_SHORT).show()
             }
     }
 
-    private fun displayMoodForDate(date: String, moodTextView: TextView) {
-        val userId = mAuth.currentUser?.uid
-        if (userId != null) {
-            firestore.collection("users")
-                .document(userId)
-                .collection("moods")
-                .document(date)
-                .get()
-                .addOnSuccessListener { documentSnapshot ->
-                    if (documentSnapshot.exists()) {
-                        val mood = documentSnapshot.getString("mood")
-                        if (mood != null) {
-                            // Display mood in the TextView
-                            moodTextView.text = "Mood for $date: $mood"
-                        } else {
-                            moodTextView.text = "No mood recorded for $date"
-                        }
+    private fun displayMoodForId(userId: String, moodId: String, moodTextView: TextView) {
+        firestore.collection("users")
+            .document(userId)
+            .collection("moods")
+            .document(moodId)
+            .get()
+            .addOnSuccessListener { documentSnapshot ->
+                if (documentSnapshot.exists()) {
+                    val mood = documentSnapshot.getString("mood")
+                    val date = documentSnapshot.getString("date")
+                    if (mood != null && date != null) {
+                        // Display mood and date in the TextView
+                        moodTextView.text = "Mood for $date: $mood"
+                    } else {
+                        moodTextView.text = "No mood recorded for $moodId"
+                    }
+                } else {
+                    moodTextView.text = "No mood recorded for $moodId"
+                }
+            }
+            .addOnFailureListener {
+                moodTextView.text = "Failed to retrieve mood for $moodId"
+            }
+    }
+
+    private fun displayMoodForDate(userId: String, date: String, moodTextView: TextView) {
+        firestore.collection("users")
+            .document(userId)
+            .collection("moods")
+            .whereEqualTo("date", date)
+            .get()
+            .addOnSuccessListener { querySnapshot ->
+                if (!querySnapshot.isEmpty) {
+                    val mood = querySnapshot.documents[0].getString("mood")
+                    if (mood != null) {
+                        moodTextView.text = "Mood for $date: $mood"
                     } else {
                         moodTextView.text = "No mood recorded for $date"
                     }
+                } else {
+                    moodTextView.text = "No mood recorded for $date"
                 }
-                .addOnFailureListener {
-                    moodTextView.text = "Failed to retrieve mood for $date"
-                }
-        }
+            }
+            .addOnFailureListener {
+                moodTextView.text = "Failed to retrieve mood for $date"
+            }
     }
 }

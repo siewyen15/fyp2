@@ -27,7 +27,7 @@ public class NewProfileActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_edit_profile);
+        setContentView(R.layout.activity_new_profile);
 
         // Initialize Firestore
         db = FirebaseFirestore.getInstance();
