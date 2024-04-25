@@ -43,6 +43,12 @@
             android:name=".WorkoutCompleteActivity"
             android:exported="false" />
         <activity
+            android:name=".NutritionHomePage"
+            android:exported="false" />
+        <activity
+            android:name=".BmiCalculator"
+            android:exported="false" />
+        <activity
             android:name=".AddWorkoutGoalActivity"
             android:exported="false"
             android:theme="@style/Theme.Fyp2" />

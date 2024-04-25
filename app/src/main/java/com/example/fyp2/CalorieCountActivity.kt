@@ -25,17 +25,23 @@ class CalorieCountActivity : AppCompatActivity() {
         textViewCalorieBurnSquats.text = "Squats: 7.0"
         textViewCalorieBurnPlank.text = "Plank: 5.0"
 
-        // Calculate calorie burn on button click
-        btnCalculate.setOnClickListener {
-            val exercise = spinnerExercise.selectedItem.toString()
-            val minutes = editTextMinutes.text.toString().toDoubleOrNull() ?: 0.0
+        // Check if spinnerExercise is null before accessing it
+        if (spinnerExercise != null) {
+            // Calculate calorie burn on button click
+            btnCalculate.setOnClickListener {
+                val exercise = spinnerExercise.selectedItem.toString()
+                val minutes = editTextMinutes.text.toString().toDoubleOrNull() ?: 0.0
 
-            val calorieBurn = calculateCalorieBurn(exercise, minutes)
-            textViewResult.text = "Result: $calorieBurn calories"
+                val calorieBurn = calculateCalorieBurn(exercise, minutes)
+                textViewResult.text = "Result: $calorieBurn calories"
+            }
+        } else {
+            Toast.makeText(this, "Spinner not found", Toast.LENGTH_SHORT).show()
         }
     }
 
-    private fun calculateCalorieBurn(exercise: String, minutes: Double): Double {
+
+    private fun calculateCalorieBurn(exercise: String?, minutes: Double): Double {
         // Define calorie burn per minute for each exercise
         val calorieBurnMap = mapOf(
             "Pushups" to 10.0,
@@ -44,7 +50,17 @@ class CalorieCountActivity : AppCompatActivity() {
             "Plank" to 5.0
         )
 
+        // Check if exercise is null or empty
+        if (exercise.isNullOrEmpty()) {
+            // Handle null or empty exercise
+            return 0.0
+        }
+
+        // Retrieve calorie burn value for the exercise
+        val calorieBurnPerMinute = calorieBurnMap[exercise] ?: 0.0
+
         // Calculate total calorie burn
-        return calorieBurnMap[exercise]!! * minutes
+        return calorieBurnPerMinute * minutes
     }
+
 }

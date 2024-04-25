@@ -1,5 +1,3 @@
-// EmergencyContactActivity.kt
-
 package com.example.fyp2
 
 import android.content.ClipData
@@ -48,6 +46,7 @@ class EmergencyContactActivity : AppCompatActivity() {
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 adapter.filter.filter(s)
             }
+
             override fun afterTextChanged(s: Editable?) {}
         })
 
@@ -77,10 +76,7 @@ class EmergencyContactActivity : AppCompatActivity() {
             }
         }
 
-    }
-
-    override fun onResume() {
-        super.onResume()
+        // Refresh emergency contacts list
         refreshEmergencyContactsList()
     }
 
@@ -94,9 +90,10 @@ class EmergencyContactActivity : AppCompatActivity() {
                 .addOnSuccessListener { result ->
                     emergencyContacts.clear()
                     for (document in result) {
+                        val name = document.getString("name") ?: ""
                         val countryCode = document.getString("countryCode") ?: ""
                         val phoneNumber = document.getString("phoneNumber") ?: ""
-                        emergencyContacts.add("$countryCode - $phoneNumber")
+                        emergencyContacts.add("$name - $countryCode - $phoneNumber")
                     }
                     // Add Police and Ambulance numbers
                     emergencyContacts.add("Police: 999")

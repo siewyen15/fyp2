@@ -15,4 +15,7 @@
     <color name="neutral_color">#FFFFEB3B</color>
     <color name="angry_color">#FFF44336</color>
     <color name ="excited_color">#FF000000</color>
+
+    <color name="ediText_color">#C2FDCF</color>
+    <color name="button_color">#48D767</color>
 </resources>

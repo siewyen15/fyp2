@@ -1,6 +1,9 @@
 package com.example.fyp2
 
+import android.content.Intent
 import android.os.Bundle
+import android.widget.Button
+import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -37,6 +40,16 @@ class JournalActivity : AppCompatActivity() {
 
         // Retrieve data from Firestore and update RecyclerView
         fetchData()
+
+        // Find the button by ID
+        val addButton = findViewById<ImageButton>(R.id.btn_add_journal)
+
+        // Set OnClickListener to handle clicks
+        addButton.setOnClickListener {
+            // Navigate to the activity to add a new journal entry
+            val intent = Intent(this, AddJournalActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun fetchData() {
@@ -56,5 +69,5 @@ class JournalActivity : AppCompatActivity() {
             // Handle failure
         }
     }
-
 }
+
