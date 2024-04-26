@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Title -->
+    <TextView
+        android:id="@+id/titleTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Body Data"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="32dp"/>
+
+    <!-- Add Button (ImageButton) -->
+
+    <!-- Weight TextView -->
+
+    <ImageButton
+        android:id="@+id/btn_add_journal"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_alignTop="@id/titleTextView"
+        android:layout_marginStart="49dp"
+        android:layout_marginTop="-7dp"
+        android:layout_toEndOf="@+id/titleTextView"
+        android:background="@android:color/transparent"
+        android:src="@drawable/ic_baseline_add_24" />
+
+    <TextView
+        android:id="@+id/weightTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Weight: "
+        android:layout_below="@id/titleTextView"
+        android:layout_marginTop="24dp"
+        android:layout_marginStart="16dp"/>
+
+    <!-- Height TextView -->
+    <TextView
+        android:id="@+id/heightTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Height: "
+        android:layout_below="@id/weightTextView"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="16dp"/>
+
+    <!-- Age TextView -->
+    <TextView
+        android:id="@+id/ageTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Age: "
+        android:layout_below="@id/heightTextView"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="16dp"/>
+
+    <!-- Gender TextView -->
+    <TextView
+        android:id="@+id/genderTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Gender: "
+        android:layout_below="@id/ageTextView"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="16dp"/>
+
+</RelativeLayout>

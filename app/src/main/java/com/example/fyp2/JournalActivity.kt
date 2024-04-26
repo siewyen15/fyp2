@@ -57,7 +57,7 @@ class JournalActivity : AppCompatActivity() {
             val entries = mutableListOf<JournalEntry>()
             for (document in documents) {
                 val title = document.getString("title") ?: ""
-                val imageUrl = document.getString("imageUrl")
+                val imageUrl = document.getString("imageUrl") ?: ""
                 val description = document.getString("description") ?: ""
                 val mood = document.getString("mood") ?: ""
                 val date = document.getString("date") ?: ""

@@ -10,7 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.widget.TextView
 
 
-class MeditationActivity : AppCompatActivity() {
+class YogaPose2Activity : AppCompatActivity() {
 
     private lateinit var spinnerDuration: Spinner
     private lateinit var btnStart: Button
@@ -19,7 +19,7 @@ class MeditationActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_meditation)
+        setContentView(R.layout.activity_yoga_pose2)
 
         // Initialize views
         spinnerDuration = findViewById(R.id.spinner_duration)
@@ -67,7 +67,7 @@ class MeditationActivity : AppCompatActivity() {
     private fun showCongratulationsDialog() {
         val alertDialog = AlertDialog.Builder(this)
             .setTitle("Congratulations!")
-            .setMessage("You have completed your Meditation.")
+            .setMessage("You have completed your Yoga Pose 2.")
             .setPositiveButton("OK") { dialog, _ ->
                 dialog.dismiss()
                 // You can perform any additional actions here if needed

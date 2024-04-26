@@ -67,6 +67,6 @@ class OwnPostActivity : AppCompatActivity() {
     }
 
     companion object {
-        private const val TAG = "ViewPostActivity"
+        private const val TAG = "OwnPostActivity"
     }
 }

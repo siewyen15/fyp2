@@ -1,98 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@android:color/white">
+    android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/countdownImageView"
-        android:layout_width="300dp"
-        android:layout_height="300dp"
-        android:layout_centerInParent="true"
-        android:src="@drawable/start"
-        android:visibility="gone" />
-
-    <ImageView
-        android:id="@+id/restImageView"
-        android:layout_width="300dp"
-        android:layout_height="300dp"
-        android:layout_centerInParent="true"
-        android:src="@drawable/rest"
-        android:visibility="gone" />
-
-    <ImageView
-        android:id="@+id/yogaImageView"
-        android:layout_width="300dp"
-        android:layout_height="300dp"
-        android:layout_centerInParent="true"
-        android:src="@drawable/yoga"
-        android:visibility="visible" />
-
+    <!-- Health TextView -->
     <TextView
-        android:id="@+id/yogaTitleTextView"
+        android:id="@+id/textView_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@id/yogaImageView"
-        android:layout_centerHorizontal="true"
-        android:text="Pose 1"
-        android:layout_marginBottom="20dp"
-        android:textSize="18sp" />
-
-    <TextView
-        android:id="@+id/restTitleTextView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@id/restImageView"
-        android:layout_centerHorizontal="true"
-        android:text="Rest"
-        android:textSize="18sp"
-        android:visibility="gone" />
-
-    <TextView
-        android:id="@+id/restTitleTextView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@id/yogaImageView"
-        android:layout_centerHorizontal="true"
-        android:text="Rest"
-        android:textSize="18sp"
-        android:visibility="gone" />
-
-    <TextView
-        android:id="@+id/descriptionTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/yogaImageView"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
         android:text="Yoga"
-        android:visibility="visible" />
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
 
-    <TextView
-        android:id="@+id/timerTextView"
+    <!-- Vertical LinearLayout containing ImageButtons -->
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/descriptionTextView"
-        android:layout_centerHorizontal="true"
-        android:text="00:00"
-        android:textSize="24sp" />
+        android:orientation="vertical"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@id/textView_title"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="16dp">
 
-    <Button
-        android:id="@+id/startButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/timerTextView"
-        android:layout_centerHorizontal="true"
-        android:text="Start" />
+        <!-- Push-ups Button -->
+        <Button
+            android:id="@+id/pushups_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pose 1"
+            android:layout_marginBottom="16dp"/>
 
-    <Button
-        android:id="@+id/stopButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/startButton"
-        android:layout_centerHorizontal="true"
-        android:text="Stop"
-        android:visibility="gone" />
+        <!-- Sit-ups Button -->
+        <Button
+            android:id="@+id/situps_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pose 2"
+            android:layout_marginBottom="16dp"/>
 
-</RelativeLayout>
+        <!-- Squats Button -->
+        <Button
+            android:id="@+id/squats_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pose 3"
+            android:layout_marginBottom="16dp"/>
+
+        <!-- Plank Button -->
+        <Button
+            android:id="@+id/plank_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pose 4"/>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

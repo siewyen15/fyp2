@@ -115,29 +115,56 @@ class AddJournalActivity : AppCompatActivity() {
             return
         }
 
-        // Create a HashMap to store the journal entry data
-        val journalEntry = hashMapOf(
-            "title" to title,
-            "description" to description,
-            "mood" to mood,
-            "date" to currentDate,
-            "time" to currentTime
-            // Add more fields if needed
-        )
+        // Check if an image is selected
+        if (selectedImageUri == null) {
+            // Show an error message
+            Toast.makeText(this, "Please select an image", Toast.LENGTH_SHORT).show()
+            return
+        }
 
-        // Add the journal entry to Firestore
-        userPostsCollection.add(journalEntry)
-            .addOnSuccessListener { documentReference ->
-                // Show a success message
-                Toast.makeText(this, "Journal entry saved successfully", Toast.LENGTH_SHORT).show()
-                // Start JournalActivity
-                startActivity(Intent(this, JournalActivity::class.java))
-                // Finish this activity
-                finish()
+        // Create a reference to store the image in Firebase Storage
+        val imageName = UUID.randomUUID().toString()
+        val storageReference = storage.reference.child("images/$imageName")
+
+        // Upload the image to Firebase Storage
+        val uploadTask = storageReference.putFile(selectedImageUri!!)
+
+        uploadTask.addOnSuccessListener { taskSnapshot ->
+            // Image uploaded successfully, get the download URL
+            storageReference.downloadUrl.addOnSuccessListener { uri ->
+                // Save the download URL to Firestore
+                val imageUrl = uri.toString()
+
+                // Create a HashMap to store the journal entry data
+                val journalEntry = hashMapOf(
+                    "title" to title,
+                    "imageUrl" to imageUrl,
+                    "description" to description,
+                    "mood" to mood,
+                    "date" to currentDate,
+                    "time" to currentTime
+                    // Add more fields if needed
+                )
+
+                // Add the journal entry to Firestore
+                userPostsCollection.add(journalEntry)
+                    .addOnSuccessListener { documentReference ->
+                        // Show a success message
+                        Toast.makeText(this, "Journal entry saved successfully", Toast.LENGTH_SHORT).show()
+                        // Start JournalActivity
+                        startActivity(Intent(this, JournalActivity::class.java))
+                        // Finish this activity
+                        finish()
+                    }
+                    .addOnFailureListener { e ->
+                        // Show an error message
+                        Toast.makeText(this, "Failed to save journal entry: ${e.message}", Toast.LENGTH_SHORT).show()
+                    }
             }
-            .addOnFailureListener { e ->
-                // Show an error message
-                Toast.makeText(this, "Failed to save journal entry: ${e.message}", Toast.LENGTH_SHORT).show()
-            }
+        }.addOnFailureListener { e ->
+            // Show an error message
+            Toast.makeText(this, "Failed to upload image: ${e.message}", Toast.LENGTH_SHORT).show()
+        }
     }
+
 }

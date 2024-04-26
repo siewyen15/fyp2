@@ -68,7 +68,7 @@
                 android:layout_height="150dp"
                 android:contentDescription="Report"
                 android:scaleType="fitCenter"
-                android:src="@drawable/mail" />
+                android:src="@drawable/report" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -105,7 +105,7 @@
                 android:layout_height="150dp"
                 android:contentDescription="Goal"
                 android:scaleType="fitCenter"
-                android:src="@drawable/physical_health" />
+                android:src="@drawable/goal" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -130,7 +130,7 @@
                 android:layout_height="150dp"
                 android:contentDescription="Image 4"
                 android:scaleType="fitCenter"
-                android:src="@drawable/ic_launcher_foreground" />
+                android:src="@drawable/calendar" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -167,7 +167,7 @@
                 android:layout_height="150dp"
                 android:contentDescription="Image 5"
                 android:scaleType="fitCenter"
-                android:src="@drawable/ic_launcher_foreground" />
+                android:src="@drawable/calories" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -192,7 +192,7 @@
                 android:layout_height="150dp"
                 android:contentDescription="Image 6"
                 android:scaleType="fitCenter"
-                android:src="@drawable/ic_launcher_foreground" />
+                android:src="@drawable/body_data" />
 
             <TextView
                 android:layout_width="wrap_content"

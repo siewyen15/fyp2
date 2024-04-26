@@ -48,9 +48,14 @@ class PhysicalHealthActivity : AppCompatActivity() {
             startActivity(calorieIntent)
         }
 
-//         // Inside the OnClickListener for ImageButton 6 (Body)
-//            val bodyIntent = Intent(this, BodyDataActivity::class.java)
-//            startActivity(bodyIntent)
+        // Inside the OnClickListener for ImageButton 5 (Calorie)
+        bodyDataButton.setOnClickListener {
+            val bodyIntent = Intent(this, BodyDataActivity::class.java)
+            startActivity(bodyIntent)
+        }
+
+
+
 
     }
 }
