@@ -17,6 +17,7 @@
             android:layout_height="wrap_content"
             android:text="Exercise Name: "
             android:textSize="18sp"
+            android:layout_marginLeft="20dp"
             android:textStyle="bold" />
 
         <TextView
@@ -24,6 +25,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Goal: "
+            android:layout_marginLeft="20dp"
             android:textSize="16sp" />
 
         <TextView
@@ -31,6 +33,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Date: "
+            android:layout_marginLeft="20dp"
             android:textSize="16sp" />
 
         <!-- Done button -->
@@ -40,6 +43,7 @@
             android:layout_height="wrap_content"
             android:text="Done"
             android:layout_gravity="end"
+            android:layout_marginRight="20dp"
             android:layout_marginTop="16dp" />
 
         <!-- Delete button -->
@@ -49,6 +53,7 @@
             android:layout_height="wrap_content"
             android:text="Delete"
             android:layout_gravity="end"
+            android:layout_marginRight="20dp"
             android:layout_marginTop="16dp" />
 
     </LinearLayout>

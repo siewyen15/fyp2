@@ -50,6 +50,7 @@ class WorkoutGoalAdapter(
         fun bind(goal: WorkoutGoal) {
             binding.textViewExercise.text = goal.exercise
             binding.textViewGoal.text = "Goal: ${goal.goal}"
+            binding.textViewDate.text = "Date: ${goal.date}" // Assuming textViewDate is the TextView for displaying the date
         }
 
         private fun deleteGoal(goal: WorkoutGoal) {

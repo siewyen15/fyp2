@@ -53,13 +53,14 @@
 
     <!-- Delete button -->
     <Button
-        android:id="@+id/btnDelete"
+        android:id="@+id/btnLike"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Delete"
+        android:text="Like"
         android:layout_gravity="end"
         android:layout_marginRight="20dp"
         android:layout_marginTop="16dp" />
+
 
 
 

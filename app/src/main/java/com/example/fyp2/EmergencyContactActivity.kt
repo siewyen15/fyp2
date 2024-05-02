@@ -59,16 +59,17 @@ class EmergencyContactActivity : AppCompatActivity() {
         emergencyContactListView.setOnItemClickListener { _, _, position, _ ->
             val selectedContact = emergencyContacts[position]
             val phoneNumber = extractPhoneNumber(selectedContact)
+            val countryCode = extractCountryCode(selectedContact)
             phoneNumber?.let {
-                val countryCode = extractCountryCode(selectedContact)
+                // Combine country code and phone number
                 val phoneNumberWithCountryCode = countryCode + it
 
-                // Copy phone number to clipboard
+                // Copy only phone number and country code to clipboard
                 val clipboardManager = getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
                 val clipData = ClipData.newPlainText("Phone Number", phoneNumberWithCountryCode)
                 clipboardManager.setPrimaryClip(clipData)
 
-                // Initiate phone call
+                // Redirect to the dial pad
                 val intent = Intent(Intent.ACTION_DIAL).apply {
                     data = Uri.parse("tel:$phoneNumberWithCountryCode")
                 }

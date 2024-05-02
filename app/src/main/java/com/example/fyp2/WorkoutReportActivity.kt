@@ -100,20 +100,23 @@ class WorkoutReportActivity : AppCompatActivity() {
         val enteredCompletedSets = binding.completedSetsEditText.text.toString().toIntOrNull()
         Log.d("WorkoutReportActivity", "Entered completed sets: $enteredCompletedSets")
         val completionPercentage = if (enteredCompletedSets != null && totalGoal > 0) {
-            (enteredCompletedSets.toFloat() / totalGoal.toFloat()) * 100
+            ((enteredCompletedSets.toFloat() / totalGoal.toFloat()) * 100).toDouble()
         } else {
-            0f
+            0.0
         }
         displayCompletionPercentage(completionPercentage, enteredCompletedSets ?: 0, totalGoal)
     }
 
 
-    private fun displayCompletionPercentage(completionPercentage: Float, enteredCompletedSets: Int, totalGoal: Int) {
-        val percentageText = "Completion Percentage: $completionPercentage%\n\n" +
+
+    private fun displayCompletionPercentage(completionPercentage: Double, enteredCompletedSets: Int, totalGoal: Int) {
+        val formattedPercentage = String.format("%.2f", completionPercentage)
+        val percentageText = "Completion Percentage: $formattedPercentage%\n\n" +
                 "Total Completed Sets: $enteredCompletedSets\n" +
                 "Total Goal: $totalGoal\n\n" +
                 "Calculation Steps:\n" +
-                "$enteredCompletedSets / $totalGoal * 100 = $completionPercentage%"
+                "$enteredCompletedSets / $totalGoal * 100 = $formattedPercentage%"
         binding.completionPercentageTextView.text = percentageText
     }
+
 }

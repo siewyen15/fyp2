@@ -61,7 +61,7 @@ class WorkoutGoalActivity : AppCompatActivity() {
                         val goal = document.getString("goal") ?: ""
                         val date = document.getString("date") ?: ""
                         // Add the goal to the list
-                        goalsList.add(WorkoutGoal(document.id, exercise, goal, date.toString()))
+                        goalsList.add(WorkoutGoal(document.id, exercise, goal, date))
                     }
                     // Update the RecyclerView with the retrieved goals
                     adapter.submitList(goalsList)
@@ -72,6 +72,7 @@ class WorkoutGoalActivity : AppCompatActivity() {
                 }
         }
     }
+
 
     private fun onWorkoutGoalComplete(goal: WorkoutGoal) {
         val db = FirebaseFirestore.getInstance()

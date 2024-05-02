@@ -76,18 +76,17 @@ class AddWorkoutGoalActivity : AppCompatActivity(), DatePickerDialog.OnDateSetLi
             val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
             val dateString = dateFormat.format(selectedDate.time)
 
-            // Create a new workout goal document
-            val workoutGoal = hashMapOf(
-                "exercise" to selectedExercise,
-                "goal" to goal,
-                "date" to dateString // Save date as string
-            )
-
             // Check if the selected date is before today's date
-            if (selectedDate.before(Calendar.getInstance())) {
+            val currentDate = Calendar.getInstance()
+            if (selectedDate.before(currentDate)) {
                 // If so, mark the goal as completed
-                // If the goal is completed, mark it as such
-                workoutGoal["completed"] = true.toString()
+                val workoutGoal = hashMapOf(
+                    "exercise" to selectedExercise,
+                    "goal" to goal,
+                    "date" to dateString, // Save date as string
+                    "completed" to true.toString() // Mark as completed
+                )
+
                 // Add the completed workout goal document to Firestore
                 db.collection("users")
                     .document(currentUser.uid)
@@ -107,6 +106,13 @@ class AddWorkoutGoalActivity : AppCompatActivity(), DatePickerDialog.OnDateSetLi
                     }
             } else {
                 // If not, add the workout goal to the regular collection
+                val workoutGoal = hashMapOf(
+                    "exercise" to selectedExercise,
+                    "goal" to goal,
+                    "date" to dateString // Save date as string
+                )
+
+                // Add the workout goal to Firestore
                 db.collection("users")
                     .document(currentUser.uid)
                     .collection("workoutGoals")
@@ -126,5 +132,6 @@ class AddWorkoutGoalActivity : AppCompatActivity(), DatePickerDialog.OnDateSetLi
             }
         }
     }
+
 
 }

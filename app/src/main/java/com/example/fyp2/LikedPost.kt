@@ -1,6 +1,6 @@
 package com.example.fyp2
 
-data class Post(
+data class LikedPost(
     val postId: String,
     val userId: String,
     val date: String,
